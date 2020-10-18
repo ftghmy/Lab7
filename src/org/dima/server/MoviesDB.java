@@ -67,7 +67,6 @@ public class MoviesDB {
         this.movies = new LinkedHashMap<Long, Movie>();
         parseXmlFile(source);
         locker = new ReentrantLock();
-        //TODO replace read from xml file to pg db
         //runTests();
     }
 
@@ -96,7 +95,6 @@ public class MoviesDB {
         }
     }
 
-    //TODO replece print to xml by pg db
 
     /**
      * Запись данных в XML
@@ -168,7 +166,6 @@ public class MoviesDB {
         movie.setId(getInformation().getMax_id() + 1);
         movie.setCreationDate(LocalDate.now());
         if (movie.validate()) {
-            //TODO new_movie = insert(movie)
             Movie new_movie = posgressHelper.insert(movie, user_id);
             movies.put(new_movie.getId(), new_movie);
         } else {
@@ -217,7 +214,6 @@ public class MoviesDB {
      * @return True-если заменил,False-если не заменил
      */
     public boolean remove(Long key, Integer user_id) {
-        //TODO remove(id)
         if (key != null && posgressHelper.remove(key, user_id)) {
             movies.remove(key);
             return true;
